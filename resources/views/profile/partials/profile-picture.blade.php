@@ -1,10 +1,10 @@
 <section class="space-y-6">
     <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+        <h2 class="text-lg font-medium text-gray-900">
             {{ __('Profile Picture') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-700 dark:text-gray-400">
+        <p class="mt-1 text-sm text-gray-700">
             {{ __('Upload a new profile picture.') }}
         </p>
     </header>
@@ -36,7 +36,7 @@
                 name="profile_photo"
                 type="file"
                 accept="image/*"
-                class="mt-1 block w-full text-sm text-gray-700 dark:text-gray-300"
+                class="mt-1 block w-full text-sm text-gray-700"
             />
             <x-input-error class="mt-2" :messages="$errors->get('profile_photo')" />
         </div>
@@ -50,7 +50,7 @@
                     x-show="show"
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600 dark:text-gray-400"
+                    class="text-sm text-gray-600"
                 >
                     {{ __('Saved.') }}
                 </p>

@@ -4,22 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Ticket extends Model 
+class Comment extends Model
 {
     protected $fillable = [
-        'title',
-        'description',
-        'status',
         'user_id',
+        'ticket_id',
+        'body',
     ];
-
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function comments()
+    public function ticket()
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsTo(Ticket::class);
     }
 }

@@ -11,7 +11,7 @@
             @csrf
 
             <div class="mb-4">
-                <label class="block text-sm text-white font-medium">Titel</label>
+                <label class="block text-sm text-gray-700 font-medium">Titel</label>
                 <input 
                     type="text"
                     name="title"
@@ -20,7 +20,7 @@
             </div>
 
             <div class="mb-4">
-                <label class="block text-sm text-white font-medium">Beschrijving</label>
+                <label class="block text-sm text-gray-700 font-medium">Beschrijving</label>
                 <textarea 
                     name="description"
                     rows="4"
