@@ -7,7 +7,6 @@
     </x-slot>
 
     <div class="p-6 space-y-6">
-        <!-- Ticket Details -->
         <div class="bg-white p-6 border border-gray-300 rounded-lg">
             <div class="flex justify-between items-start mb-4">
                 <div>
@@ -41,7 +40,7 @@
                     </select>
                 </div>
 
-                <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">Update</button>
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">Update</button>
             </form>
         </div>
         @endif

@@ -70,4 +70,14 @@ class TicketController extends Controller
         return redirect()->route('tickets.show', $ticket)
             ->with('success', 'Ticket updated successfully.');
     }
+
+    public function dashboard()
+    {
+        $stats = Ticket::where('user_id', auth()->id())
+            ->selectRaw('status, COUNT(*) as total')
+            ->groupBy('status')
+            ->pluck('total', 'status');
+
+        return view ('dashboard', compact('stats'));
+    }
 }

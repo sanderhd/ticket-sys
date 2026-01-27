@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <h2 class="text-xl text-white font-semibold">Nieuwe Ticket</h2>
+            <h2 class="text-xl font-semibold">Nieuwe Ticket</h2>
             <button onclick="window.location='{{ route('tickets.index') }}'" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">Mijn tickets</button>
         </div>
     </x-slot>
