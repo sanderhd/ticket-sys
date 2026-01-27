@@ -10,6 +10,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('over-ons', function () {
+    return view('over-ons');
+})->name('over-ons');
+
 Route::get('/dashboard', function () {
     $stats = Ticket::where('user_id', auth()->id())
             ->selectRaw('status, COUNT(*) as total')

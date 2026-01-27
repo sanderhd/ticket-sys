@@ -5,6 +5,86 @@
         </a>
     </div>
 
+    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+        <x-nav-link :href="route('over-ons')">
+            Over Ons
+        </x-nav-link>
+
+        <x-nav-link :href="route('over-ons')">
+            Prijzen
+            
+        </x-nav-link>
+
+        <div class="relative group">
+            <button
+                class="inline-flex items-center text-sm font-medium text-gray-600 hover:text-gray-800 transition">
+                Product
+                <svg class="ms-1 h-4 w-4 fill-current transition-transform group-hover:rotate-180"
+                    viewBox="0 0 20 20">
+                    <path d="M5.293 7.293L10 12l4.707-4.707z" />
+                </svg>
+            </button>
+
+            <div
+                class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg
+                    opacity-0 invisible group-hover:visible group-hover:opacity-100
+                    transition-all duration-150 z-50">
+
+                <a href="{{ route('over-ons') }}"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Features
+                </a>
+
+                <a href="{{ route('over-ons') }}"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Demo
+                </a>
+
+                <a href="{{ route('over-ons') }}"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Updates
+                </a>
+            </div>
+        </div>
+
+
+        <div class="relative group">
+            <button
+                class="inline-flex items-center text-sm font-medium text-gray-600 hover:text-gray-800 transition">
+                Support
+                <svg class="ms-1 h-4 w-4 fill-current transition-transform group-hover:rotate-180"
+                    viewBox="0 0 20 20">
+                    <path d="M5.293 7.293L10 12l4.707-4.707z" />
+                </svg>
+            </button>
+
+            <div
+                class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg
+                    opacity-0 invisible group-hover:visible group-hover:opacity-100
+                    transition-all duration-150 z-50">
+
+                <a href="{{ route('over-ons') }}"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Documentatie
+                </a>
+
+                <a href="{{ route('over-ons') }}"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    FAQ
+                </a>
+
+                <a href="{{ route('over-ons') }}"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Status
+                </a>
+            </div>
+        </div>
+
+        <x-nav-link :href="route('over-ons')">
+            Contact
+        </x-nav-link>
+    </div>
+
     <div class="hidden sm:flex sm:items-center sm:ms-6">
         <x-dropdown align="right" width="48">
             <x-slot name="trigger">

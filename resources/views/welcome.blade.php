@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{{  config('app.name', 'Ticket Flow') }}</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -14,10 +15,10 @@
         @endif
     </head>
 
-    <body>
+    <body class="bg-gray-50">
         @include('layouts.navbar')
 
-        <header class="bg-gray-50">
+        <header>
             <div class="flex justify-center px-6 lg:px-8 py-20">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full max-w-[1200px]">
                 
@@ -88,5 +89,12 @@
                 </div>
             </div>
         </header>
+
+        <main>
+            @include('layouts.features')
+            @include('layouts.cta')
+        </main>
+
+        @include('layouts.footer')
     </body>
 </html>
