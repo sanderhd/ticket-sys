@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AdminContactController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Ticket;
 
@@ -13,6 +15,20 @@ Route::get('/', function () {
 Route::get('over-ons', function () {
     return view('over-ons');
 })->name('over-ons');
+
+Route::get('prijzen', function () {
+    return view('prijzen');
+})->name('prijzen');
+
+Route::get('contact', function () {
+    return view('contact');
+})->name('contact');
+
+Route::post('contact', [ContactController::class, 'store'])->name('contact.store');
+
+Route::get('faq', function () {
+    return view('faq');
+})->name('faq');
 
 Route::get('/dashboard', function () {
     $stats = Ticket::where('user_id', auth()->id())
@@ -34,5 +50,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/tickets/{ticket}/comments', [CommentController::class, 'store'])->middleware('auth')->name('comments.store');
+
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
+    Route::get('contact', [AdminContactController::class, 'index'])->name('admin.contact.index');
+});
 
 require __DIR__.'/auth.php';

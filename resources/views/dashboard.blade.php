@@ -1,6 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-2xl font-bold text-gray-900">Mijn Dashboard</h2>
+        <div class="flex justify-between items-center">
+            <h2 class="text-2xl font-bold text-gray-900">Mijn Dashboard</h2>
+            <button onclick="window.location='{{ route('tickets.create') }}'" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">Nieuwe ticket</button>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -22,13 +25,13 @@
                     <div class="p-6 bg-white border-b border-gray-200">
                         <h3 class="text-lg font-semibold text-gray-900 mb-6">Recente tickets</h3>
                         <div class="space-y-4">
-                            @forelse($recentTickets?->take(3) ?? [] as $ticket)
+                            @forelse(($recentTickets ?? collect())->take(3) as $ticket)
                                 <div class="border-l-4 border-blue-500 pl-4">
                                     <p class="font-medium text-gray-900">{{ $ticket->title }}</p>
-                                    <p class="text-sm text-gray-500">{{ $ticket->created_at->diffForHumans() }}</p>
+                                    <p class="text-sm text-gray-500">{{ $ticket->created_at?->diffForHumans() }}</p>
                                 </div>
                             @empty
-                                <p class="text-gray-500">Geen tickets beschikbaar</p>
+                                <p class="text-gray-500">Er zijn momenteel geen recente tickets.</p>
                             @endforelse
                         </div>
                     </div>

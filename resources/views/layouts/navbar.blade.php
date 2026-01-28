@@ -1,7 +1,8 @@
 <nav class="w-full flex items-center justify-between px-8 py-4 bg-gray-50 border-b">
     <div>
-        <a href="{{ url('/') }}">
-            <x-application-logo class="w-10 h-10 fill-current text-gray-600" />
+        <a href="{{ url('/') }}" class="flex items-center space-x-3 group">
+            <x-application-logo class="w-10 h-10 fill-current text-blue-600 group-hover:text-blue-800 transition" />
+            <span class="text-2xl font-bold text-gray-800 group-hover:text-blue-800 transition">Ticket <span class="text-blue-600">Flow</span></span>
         </a>
     </div>
 
@@ -10,7 +11,7 @@
             Over Ons
         </x-nav-link>
 
-        <x-nav-link :href="route('over-ons')">
+        <x-nav-link :href="route('prijzen')">
             Prijzen
             
         </x-nav-link>
@@ -86,6 +87,7 @@
     </div>
 
     <div class="hidden sm:flex sm:items-center sm:ms-6">
+        @auth
         <x-dropdown align="right" width="48">
             <x-slot name="trigger">
                 <button
@@ -128,5 +130,8 @@
                 </form>
             </x-slot>
         </x-dropdown>
+        @else
+        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
+        @endauth
     </div>
 </nav>
