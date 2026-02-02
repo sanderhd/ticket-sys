@@ -15,13 +15,17 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    @auth
                     <x-nav-link :href="route('tickets.index')" :active="request()->routeIs('tickets.index')">
                         {{ __('Tickets') }}
                     </x-nav-link>
+                    @endauth
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
+            @auth
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -48,8 +52,12 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        <x-dropdown-link :href="route('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-dropdown-link>
+
                         <x-dropdown-link :href="route('tickets.index')">
-                            {{ __('Mijn Tickets') }}
+                            {{ __('Tickets') }}
                         </x-dropdown-link>
 
                         <x-dropdown-link :href="route('profile.edit')">
@@ -69,6 +77,20 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+            @endauth
+
+            @guest
+            <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-4">
+                <a href="{{ route('login') }}" class="text-sm text-gray-600 hover:text-gray-900">
+                    Inloggen
+                </a>
+
+                <a href="{{ route('register') }}"
+                   class="px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                    Registreren
+                </a>
+            </div>
+            @endguest
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
@@ -92,16 +114,31 @@
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
+            @auth
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
             </div>
+            @endauth
 
             <div class="mt-3 space-y-1">
+                @auth
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
+                @endauth
 
+                @guest
+                <x-responsive-nav-link :href="route('login')">
+                    Inloggen
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('register')">
+                    Registreren
+                </x-responsive-nav-link>
+                @endguest
+
+                @auth
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
@@ -112,6 +149,7 @@
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
+                @endauth
             </div>
         </div>
     </div>

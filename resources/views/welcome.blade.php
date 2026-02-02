@@ -1,4 +1,4 @@
-<!DOCTYPE="html">
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -42,7 +42,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200 lg:w-[800px]">
+                <div class="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200 lg:w-[550px]">
                     <div class="flex justify-between items-center p-6 border-b border-gray-200">
                         <h2 class="text-xl text-gray-800 font-semibold">Mijn tickets</h2>
                         <button onclick="window.location='{{ route('tickets.create') }}'" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">
@@ -60,9 +60,9 @@
                     ];
                     @endphp
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-6">
                         @foreach ($placeholderTickets as $ticket)
-                            <div class="bg-white border border-gray-300 rounded-lg p-6 shadow-md hover:shadow-lg hover:border-blue-500 transition">
+                            <div class="bg-white border border-gray-300 rounded-lg p-4 shadow-md hover:shadow-lg hover:border-blue-500 transition">
                                 <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full mb-3
                                     {{ 
                                         $ticket['status'] === 'open' ? 'bg-yellow-500 text-black' : 

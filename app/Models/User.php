@@ -62,4 +62,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function isPro()
+    {
+        return $this->plan === 'pro' || $this->plan === 'enterprise';
+    }
+
+    public function isEnterprise()
+    {
+        return $this->plan === 'enterprise';
+    }
 }
