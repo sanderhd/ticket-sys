@@ -77,6 +77,22 @@ A Laravel-based ticket management system for handling customer support tickets, 
 - Add comments to tickets.
 - View and respond to contact messages.
 
+## Live Site
+
+The application is deployed at [https://tickets.sanderhd.tech](https://tickets.sanderhd.tech/).
+
+### Test Credentials
+
+- **Admin User:**
+  - Email: admin@sanderhd.tech
+  - Password: Admin123
+  - Role: admin
+
+- **Regular User:**
+  - Email: user@sanderhd.tech
+  - Password: User123!
+  - Role: user
+
 ## Testing
 
 Run the test suite with:
