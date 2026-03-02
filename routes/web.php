@@ -51,7 +51,10 @@ Route::middleware('auth')->group(function () {
 
 Route::post('/tickets/{ticket}/comments', [CommentController::class, 'store'])->middleware('auth')->name('comments.store');
 
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('admin.contact.index');
+    })->name('admin.index');
     Route::get('contact', [AdminContactController::class, 'index'])->name('admin.contact.index');
 });
 
