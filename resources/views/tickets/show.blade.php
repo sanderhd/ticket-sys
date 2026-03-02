@@ -80,22 +80,61 @@
         @endif
 
         <div class="bg-white p-6 border border-gray-300 rounded-lg mt-6">
-            <h4 class="font-bold text-lg text-gray-900 mb-4">Reacties</h4>
-            
-            @foreach($ticket->comments as $comment)
-                <div class="mb-2 p-2 bg-gray-100 rounded">
-                    <strong>{{ $comment->user->name }}</strong>
-                    <p>{{ $comment->body }}</p>
-                    <span class="text-xs text-gray-500">{{ $comment->created_at->diffForHumans() }}</span>
+            <h4 class="font-bold text-lg text-gray-900 mb-6">Reacties</h4>
+
+            @if($ticket->comments->isEmpty())
+                <p class="text-sm text-gray-400 text-center py-6">Nog geen reacties. Wees de eerste!</p>
+            @else
+                <div class="space-y-4 mb-6">
+                    @foreach($ticket->comments as $comment)
+                        @php
+                            $isOwn = auth()->check() && auth()->id() === $comment->user_id;
+                            $initials = collect(explode(' ', $comment->user->name))
+                                ->map(fn($w) => strtoupper($w[0]))
+                                ->take(2)
+                                ->implode('');
+                            $colors = ['bg-purple-500','bg-blue-500','bg-green-500','bg-pink-500','bg-orange-500','bg-teal-500'];
+                            $color = $colors[$comment->user_id % count($colors)];
+                        @endphp
+                        <div class="flex gap-4 {{ $isOwn ? 'flex-row-reverse' : '' }}">
+                            <div class="h-9 w-9 rounded-full {{ $color }} flex items-center justify-center text-white text-xs font-bold shrink-0">
+                                {{ $initials }}
+                            </div>
+                            <div class="max-w-[75%] {{ $isOwn ? 'items-end' : 'items-start' }} flex flex-col">
+                                <div class="{{ $isOwn ? 'bg-blue-50 border border-blue-200' : 'bg-gray-50 border border-gray-200' }} rounded-lg px-4 py-3">
+                                    <div class="flex items-center gap-2 mb-1 {{ $isOwn ? 'flex-row-reverse' : '' }}">
+                                        <span class="text-sm font-semibold text-gray-800">
+                                            {{ $comment->user->name }}
+                                            @if($isOwn)
+                                                <span class="text-xs text-blue-500 font-normal ml-1">(jij)</span>
+                                            @endif
+                                        </span>
+                                        <span class="text-xs text-gray-400">{{ $comment->created_at->diffForHumans() }}</span>
+                                    </div>
+                                    <p class="text-sm text-gray-700 leading-relaxed">{{ $comment->body }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-            @endforeach
+            @endif
 
             @auth
-            <form action="{{ route('comments.store', $ticket) }}" method="POST" class="mt-4">
+            <form action="{{ route('comments.store', $ticket) }}" method="POST">
                 @csrf
-                <textarea name="body" rows="3" class="w-full border rounded p-2" placeholder="Voeg een reactie toe..."></textarea>
-                <x-input-error :messages="$errors->get('body')" class="mt-1" />
-                <button type="submit" class="mt-2 px-4 py-2 bg-blue-600 text-white rounded">Plaatsen</button>
+                <div class="border border-gray-300 rounded-lg p-4 bg-gray-50">
+                    <textarea
+                        name="body"
+                        rows="3"
+                        class="w-full text-sm text-gray-800 bg-transparent resize-none outline-none placeholder-gray-400"
+                        placeholder="Schrijf een reactie..."></textarea>
+                    <x-input-error :messages="$errors->get('body')" class="mt-1" />
+                    <div class="flex justify-end mt-2">
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded transition">
+                            Verstuur reactie
+                        </button>
+                    </div>
+                </div>
             </form>
             @endauth
         </div>

@@ -21,164 +21,292 @@
         <section class="bg-gray-50 border-b">
             <div class="max-w-7xl mx-auto px-6 py-20 text-center">
                 <span class="inline-block bg-blue-100 text-blue-700 text-sm font-medium px-4 py-1 rounded-full mb-4">
-                    Veelgestelde vragen
+                    Interactieve demo
                 </span>
                 <h1 class="text-4xl font-bold text-gray-900 mb-4">
-                    Alles wat je wilt weten over <br>
-                    Ticket Flow
+                    Bekijk hoe Ticket Flow werkt
                 </h1>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Vind snel antwoord op de meest gestelde vragen over ons platform, je account, tickets en meer.
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+                    Geen registratie nodig. Verken het dashboard en het ticketoverzicht
+                    precies zoals het er in de praktijk uitziet.
                 </p>
+                <div class="flex justify-center gap-4">
+                    <a href="{{ route('register') }}"
+                        class="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition">
+                        Gratis starten
+                    </a>
+                     <a href="#dashboard-preview"
+                       class="inline-block bg-white border border-gray-300 text-gray-700 font-semibold px-6 py-3 rounded-lg hover:bg-gray-50 transition">
+                        Bekijk preview ↓
+                    </a>
+                </div>
             </div>
         </section>
 
-        <section class="bg-white border-b sticky top-0 z-10 shadow-sm">
-            <div class="max-w-7xl mx-auto px-6 py-3 flex gap-6 overflow-x-auto text-sm font-medium text-gray-600">
-                <a href="#algemeen" class="hover:text-blue-600 whitespace-nowrap transition">Algemeen</a>
-                <a href="#account" class="hover:text-blue-600 whitespace-nowrap transition">Account</a>
-                <a href="#tickets" class="hover:text-blue-600 whitespace-nowrap transition">Tickets</a>
-                <a href="#rollen" class="hover:text-blue-600 whitespace-nowrap transition">Rollen</a>
-                <a href="#beveiliging" class="hover:text-blue-600 whitespace-nowrap transition">Beveiliging</a>
-                <a href="#prijzen" class="hover:text-blue-600 whitespace-nowrap transition">Prijzen</a>
+        <section class="bg-white border-b sticky top-0 z-10 shadow-sm" x-data="{ tab: 'dashboard' }">
+            <div class="max-w-7xl mx-auto px-6 py-3 flex gap-6 text-sm font-medium text-gray-600">
+                <button 
+                    @click="tab = 'dashboard'"
+                    :class="tab === 'dashboard' ? 'text-blue-600 border-b-2 border-blue' : 'hover:text-blue-600'"
+                    class="pb-1 transition whitespace-nowrap">
+                        <i class="fa-solid fa-gauge mr-1"></i>Dashboard
+                </button>
+                <button 
+                    @click="tab = 'tickets'"
+                    :class="tab === 'tickets' ? 'text-blue-600 border-b-2 border-blue' : 'hover:text-blue-600'"
+                    class="pb-1 transition whitespace-nowrap">
+                        <i class="fa-solid fa-ticket mr-1"></i>Tickets
+                </button>
+                <button 
+                    @click="tab = 'detail'"
+                    :class="tab === 'detail' ? 'text-blue-600 border-b-2 border-blue' : 'hover:text-blue-600'"
+                    class="pb-1 transition whitespace-nowrap">
+                        <i class="fa-solid fa-info-circle mr-1"></i> Ticket Detail
+                </button>
             </div>
-        </section>
 
-        <section class="bg-white">
-            <div class="max-w-4xl mx-auto px-6 py-24 space-y-20">
-                <div id="algemeen">
-                    <div class="mb-8">
-                        <h2 class="text-2xl font-semibold text-gray-900 mb-2">Algemeen</h2>
-                        <div class="w-12 h-1 bg-blue-600 rounded-full"></div>
+            <div x-show="tab === 'dashboard'" id="dashboard-preview" class="bg-gray-100 border-t">
+                <div class="max-w-7xl mx-auto px-6 py-10">
+                    <div class="bg-white border border-gray-200 rounded-t-xl px-6 py-3 flex items-center justify-between shadow-sm">
+                        <div class="flex items-center gap-4">
+                            <span class="font-bold text-blue-600 text-lg">{{ config('app.name', 'Ticket Flow') }}</span>
+                            <span class="text-sm text-gray-500 hidden sm:inline">Dashboard</span>
+                            <span class="text-sm text-gray-400 hidden sm:inline">|</span>
+                            <span class="text-sm text-gray-500 hidden sm:inline">Tickets</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-xs font-bold">JD</div>
+                            <span class="text-sm text-gray-700 hidden sm:inline">Jan de Vries</span>
+                            <i class="fa-solid fa-chevron-down text-gray-400 text-xs"></i>
+                        </div>
                     </div>
-                    <div class="space-y-4">
-                        <x-faq-item
-                            question="Wat is Ticket Flow?"
-                            answer="Ticket Flow is een platform dat helpt bij het beheren en volgen van tickets binnen organisaties." />
 
-                        <x-faq-item
-                            question="Voor wie is dit platform bedoeld?"
-                            answer="Het platform is geschikt voor bedrijven, Discord communities, support teams en developers die op zoek zijn naar een overzichtelijke en schaalbare oplossing voor klantenservice." />
+                    <div class="bg-white border border-t-0 border-gray-200 rounded-b-xl shadow-sm p-6">
 
-                        <x-faq-item
-                            question="Is er een gratis versie beschikbaar?"
-                            answer="Ja, je kunt gratis aan de slag met een beperkt aantal tickets en gebruikers. Voor grotere organisaties bieden wij betaalde plannen met meer mogelijkheden." />
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-2xl font-bold text-gray-900">Mijn Dashboard</h2>
+                            <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded cursor-default">
+                                Mijn tickets
+                            </button>
+                        </div>
 
-                        <x-faq-item
-                            question="In welke talen is het platform beschikbaar?"
-                            answer="Op dit moment is het platform beschikbaar in het Nederlands en Engels. Meer talen worden in de toekomst toegevoegd." />
-                    </div>
-                </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-                <div id="account">
-                    <div class="mb-8">
-                        <h2 class="text-2xl font-semibold text-gray-900 mb-2">Account</h2>
-                        <div class="w-12 h-1 bg-blue-600 rounded-full"></div>
-                    </div>
-                    <div class="space-y-4">
-                        <x-faq-item
-                            question="Hoe maak ik een account aan?"
-                            answer="Klik op 'Registreren' in de navigatiebalk, vul je naam, e-mailadres en een wachtwoord in en je account is direct klaar voor gebruik." />
+                            <div class="bg-white border border-gray-200 rounded-lg p-6">
+                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Mijn tickets</h3>
+                                <div class="flex justify-center">
+                                    <canvas id="demoChart" style="max-height:220px; max-width:220px;"></canvas>
+                                </div>
+                            </div>
 
-                        <x-faq-item
-                            question="Kan ik mijn profielgegevens wijzigen?"
-                            answer="Ja, via Instellingen kun je je naam, e-mailadres, wachtwoord en profielfoto op elk moment aanpassen." />
-
-                        <x-faq-item
-                            question="Hoe reset ik mijn wachtwoord?"
-                            answer="Ga naar de inlogpagina en klik op 'Wachtwoord vergeten'. Je ontvangt een e-mail met een resetlink die 60 minuten geldig is." />
-
-                        <x-faq-item
-                            question="Kan ik mijn account verwijderen?"
-                            answer="Ja, je kunt je account permanent verwijderen via de instellingenpagina. Let op: alle gekoppelde tickets worden hierbij ook verwijderd en dit is niet ongedaan te maken." />
-                    </div>
-                </div>
-
-                <div id="tickets">
-                    <div class="mb-8">
-                        <h2 class="text-2xl font-semibold text-gray-900 mb-2">Tickets</h2>
-                        <div class="w-12 h-1 bg-blue-600 rounded-full"></div>
-                    </div>
-                    <div class="space-y-4">
-                        <x-faq-item
-                            question="Hoe maak ik een ticket aan?"
-                            answer="Zodra je bent ingelogd, ga je naar 'Tickets' en klik je op 'Nieuw ticket'. Vul een titel, categorie, prioriteit en omschrijving in en het ticket wordt direct aangemaakt." />
-
-                        <x-faq-item
-                            question="Welke statussen kan een ticket hebben?"
-                            answer="Een ticket kan de volgende statussen hebben: Open, In behandeling, Wacht op reactie en Gesloten. De status wordt bijgewerkt door het supportteam." />
-
-                        <x-faq-item
-                            question="Kan ik bijlagen toevoegen aan een ticket?"
-                            answer="Ja, je kunt afbeeldingen en bestanden meesturen bij het aanmaken of beantwoorden van een ticket. Maximale bestandsgrootte is 10 MB per bijlage." />
-
-                        <x-faq-item
-                            question="Kan ik een gesloten ticket heropenen?"
-                            answer="Ja, zolang je toegang hebt tot het ticket kun je het heropenen via de ticketdetailpagina. Het ticket krijgt dan automatisch de status 'Open' terug." />
-
-                        <x-faq-item
-                            question="Word ik op de hoogte gesteld bij een reactie op mijn ticket?"
-                            answer="Ja, je ontvangt een e-mailmelding zodra er een reactie is geplaatst op jouw ticket of de status is gewijzigd." />
+                            <div class="bg-white border border-gray-200 rounded-lg p-6">
+                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Recente tickets</h3>
+                                <div class="space-y-4">
+                                    <div class="border-l-4 border-blue-500 pl-4">
+                                        <p class="font-medium text-gray-900">Probleem met inloggen</p>
+                                        <p class="text-sm text-gray-500">2 minuten geleden</p>
+                                    </div>
+                                    <div class="border-l-4 border-blue-500 pl-4">
+                                        <p class="font-medium text-gray-900">Foutmelding bij bestelling</p>
+                                        <p class="text-sm text-gray-500">1 uur geleden</p>
+                                    </div>
+                                    <div class="border-l-4 border-blue-500 pl-4">
+                                        <p class="font-medium text-gray-900">Account verwijderen</p>
+                                        <p class="text-sm text-gray-500">gisteren</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div id="rollen">
-                    <div class="mb-8">
-                        <h2 class="text-2xl font-semibold text-gray-900 mb-2">Rollen & Rechten</h2>
-                        <div class="w-12 h-1 bg-blue-600 rounded-full"></div>
+
+            <div x-show="tab === 'tickets'" class="bg-gray-100 border-t">
+                <div class="max-w-7xl mx-auto px-6 py-10">
+                    <div class="bg-white border border-gray-200 rounded-t-xl px-6 py-3 flex items-center justify-between shadow-sm">
+                        <div class="flex items-center gap-4">
+                            <span class="font-bold text-blue-600 text-lg">{{ config('app.name', 'Ticket Flow') }}</span>
+                            <span class="text-sm text-gray-400 hidden sm:inline">Dashboard</span>
+                            <span class="text-sm text-gray-400 hidden sm:inline">|</span>
+                            <span class="text-sm text-gray-700 font-medium hidden sm:inline">Tickets</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-xs font-bold">JD</div>
+                            <span class="text-sm text-gray-700 hidden sm:inline">Jan de Vries</span>
+                        </div>
                     </div>
-                    <div class="space-y-4">
-                        <x-faq-item
-                            question="Welke rollen zijn er beschikbaar?"
-                            answer="Er zijn drie rollen: Gebruiker (kan tickets aanmaken en volgen), Medewerker (kan tickets beheren en beantwoorden) en Admin (volledig beheer van het platform)." />
 
-                        <x-faq-item
-                            question="Wie kan rollen toewijzen?"
-                            answer="Alleen administrators kunnen rollen toewijzen of wijzigen binnen het platform." />
+                    <div class="bg-white border border-t-0 border-gray-200 rounded-b-xl shadow-sm p-6">
 
-                        <x-faq-item
-                            question="Kan een medewerker tickets van andere medewerkers inzien?"
-                            answer="Ja, medewerkers hebben toegang tot alle open tickets. Admins kunnen eventueel ticket-toewijzing instellen zodat medewerkers enkel hun eigen tickets zien." />
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-xl font-semibold text-gray-800">Mijn tickets</h2>
+                            <button class="bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded cursor-default">
+                                Nieuwe ticket
+                            </button>
+                        </div>
+
+                        <div class="bg-white border border-gray-300 rounded-lg p-4 mb-6">
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Zoeken</label>
+                                    <input type="text" disabled placeholder="Zoek in titel..." class="w-full p-2 border border-gray-300 rounded text-sm bg-gray-50 text-gray-400 cursor-default">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Status</label>
+                                    <select disabled class="w-full p-2 border border-gray-300 rounded text-sm bg-gray-50 text-gray-400 cursor-default">
+                                        <option>Alle</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Prioriteit</label>
+                                    <select disabled class="w-full p-2 border border-gray-300 rounded text-sm bg-gray-50 text-gray-400 cursor-default">
+                                        <option>Alle</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-700 mb-1">Labels</label>
+                                    <input type="text" disabled placeholder="Zoek labels" class="w-full p-2 border border-gray-300 rounded text-sm bg-gray-50 text-gray-400 cursor-default">
+                                </div>
+                            </div>
+                        </div>
+
+                        @php
+                            $demoTickets = [
+                                ['title' => 'Probleem met inloggen',      'description' => 'Kan niet inloggen met mijn account na de laatste update.',  'status' => 'open',        'priority' => 'high',   'labels' => 'auth,urgent'],
+                                ['title' => 'Foutmelding bij bestelling', 'description' => 'Krijg een 500 error bij het afronden van mijn bestelling.',  'status' => 'in_progress', 'priority' => 'medium', 'labels' => 'betaling'],
+                                ['title' => 'Account verwijderen',        'description' => 'Ik wil mijn account permanent verwijderen uit het systeem.', 'status' => 'closed',      'priority' => 'low',    'labels' => 'account'],
+                                ['title' => 'Vergeten wachtwoord',        'description' => 'De resetlink in mijn e-mail werkt niet meer.',               'status' => 'open',        'priority' => 'medium', 'labels' => 'auth'],
+                                ['title' => 'Website traag op mobiel',    'description' => 'De laadtijd op mobiel is veel te lang, meer dan 8 seconden.','status' => 'in_progress', 'priority' => 'low',    'labels' => 'performance'],
+                                ['title' => 'Factuur ontbreekt',          'description' => 'Na betaling heb ik geen factuur ontvangen per e-mail.',      'status' => 'open',        'priority' => 'high',   'labels' => 'betaling,factuur'],
+                            ];
+
+                            $statusColors = [
+                                'open'        => 'bg-yellow-500 text-black',
+                                'in_progress' => 'bg-blue-500 text-white',
+                                'closed'      => 'bg-green-500 text-white',
+                            ];
+                            $statusLabels = [
+                                'open'        => 'Open',
+                                'in_progress' => 'In Progress',
+                                'closed'      => 'Closed',
+                            ];
+                            $priorityColors = [
+                                'low'    => 'bg-green-100 text-green-700',
+                                'medium' => 'bg-yellow-100 text-yellow-700',
+                                'high'   => 'bg-red-100 text-red-700',
+                            ];
+                        @endphp
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            @foreach ($demoTickets as $ticket)
+                                <div class="bg-white border border-gray-300 rounded-lg p-5 shadow-sm hover:shadow-md hover:border-blue-400 transition">
+                                    <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full mb-3 {{ $statusColors[$ticket['status']] }}">
+                                        {{ $statusLabels[$ticket['status']] }}
+                                    </span>
+
+                                    <h3 class="text-base font-semibold text-gray-900 mb-1">{{ $ticket['title'] }}</h3>
+                                    <p class="text-sm text-gray-500 mb-4 line-clamp-2">{{ $ticket['description'] }}</p>
+
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full {{ $priorityColors[$ticket['priority']] }}">
+                                            {{ ucfirst($ticket['priority']) }}
+                                        </span>
+                                        @foreach(explode(',', $ticket['labels']) as $label)
+                                            <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700">
+                                                {{ trim($label) }}
+                                            </span>
+                                        @endforeach
+                                    </div>
+
+                                    <button class="inline-flex items-center bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded cursor-default opacity-90">
+                                        Bekijk →
+                                    </button>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div id="beveiliging">
-                    <div class="mb-8">
-                        <h2 class="text-2xl font-semibold text-gray-900 mb-2">Beveiliging</h2>
-                        <div class="w-12 h-1 bg-blue-600 rounded-full"></div>
+            <div x-show="tab === 'detail'" class="bg-gray-100 border-t">
+                <div class="max-w-7xl mx-auto px-6 py-10">
+
+                    <div class="bg-white border border-gray-200 rounded-t-xl px-6 py-3 flex items-center justify-between shadow-sm">
+                        <div class="flex items-center gap-4">
+                            <span class="font-bold text-blue-600 text-lg">{{ config('app.name', 'Ticket Flow') }}</span>
+                            <span class="text-sm text-gray-400 hidden sm:inline">Dashboard</span>
+                            <span class="text-sm text-gray-400 hidden sm:inline">|</span>
+                            <span class="text-sm text-gray-700 font-medium hidden sm:inline">Tickets</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-xs font-bold">JD</div>
+                            <span class="text-sm text-gray-700 hidden sm:inline">Jan de Vries</span>
+                        </div>
                     </div>
-                    <div class="space-y-4">
-                        <x-faq-item
-                            question="Hoe worden mijn gegevens beschermd?"
-                            answer="Alle communicatie verloopt via HTTPS. Wachtwoorden worden gehasht opgeslagen en nooit leesbaar bewaard. We volgen de GDPR-richtlijnen voor gegevensbescherming." />
 
-                        <x-faq-item
-                            question="Worden mijn gegevens gedeeld met derden?"
-                            answer="Nee, wij verkopen of delen jouw persoonlijke gegevens nooit met derden. Bekijk ons privacybeleid voor meer details." />
+                    <div class="bg-white border border-t-0 border-gray-200 rounded-b-xl shadow-sm p-6">
+                        <div class="max-w-3xl mx-auto">
 
-                        <x-faq-item
-                            question="Ondersteunt het platform tweefactorauthenticatie (2FA)?"
-                            answer="2FA-ondersteuning staat op onze roadmap en wordt binnenkort uitgerold. Je kunt je aanmelden voor updates via de nieuwsbrief." />
-                    </div>
-                </div>
+                            <div class="flex items-start justify-between mb-6">
+                                <div>
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-yellow-500 text-black">Open</span>
+                                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-red-100 text-red-700">High</span>
+                                        <span class="text-xs font-medium px-2 py-1 rounded-full bg-blue-100 text-blue-700">auth</span>
+                                        <span class="text-xs font-medium px-2 py-1 rounded-full bg-blue-100 text-blue-700">urgent</span>
+                                    </div>
+                                    <h2 class="text-xl font-bold text-gray-900">Probleem met inloggen</h2>
+                                    <p class="text-sm text-gray-400 mt-1">Aangemaakt door Jan de Vries · 2 minuten geleden</p>
+                                </div>
+                            </div>
 
-                <div id="prijzen">
-                    <div class="mb-8">
-                        <h2 class="text-2xl font-semibold text-gray-900 mb-2">Prijzen</h2>
-                        <div class="w-12 h-1 bg-blue-600 rounded-full"></div>
-                    </div>
-                    <div class="space-y-4">
-                        <x-faq-item
-                            question="Wat zijn de kosten?"
-                            answer="We bieden een gratis basisplan. Betaalde plannen beginnen vanaf €9/maand voor kleine teams. Bekijk onze prijspagina voor een volledig overzicht." />
+                            <div class="bg-gray-50 border border-gray-200 rounded-lg p-5 mb-6">
+                                <p class="text-sm text-gray-700 leading-relaxed">
+                                    Na de laatste update lukt het me niet meer om in te loggen met mijn account.
+                                    Ik heb mijn wachtwoord al opnieuw ingesteld maar het probleem blijft bestaan.
+                                    Kan iemand hier naar kijken? De foutmelding die ik krijg is: <code class="bg-gray-200 px-1 rounded text-xs">Invalid credentials</code>.
+                                </p>
+                            </div>
 
-                        <x-faq-item
-                            question="Zijn er verborgen kosten?"
-                            answer="Nee. De prijs die je ziet is wat je betaalt. Geen opstartkosten, geen verborgen transactiekosten." />
+                            <h3 class="text-base font-semibold text-gray-800 mb-4">Reacties</h3>
+                            <div class="space-y-4 mb-6">
 
-                        <x-faq-item
-                            question="Kan ik op elk moment opzeggen?"
-                            answer="Ja, je kunt je abonnement op elk moment opzeggen. Je behoudt toegang tot het einde van de betaalde periode." />
+                                <div class="flex gap-4">
+                                    <div class="h-9 w-9 rounded-full bg-purple-500 flex items-center justify-center text-white text-xs font-bold shrink-0">SB</div>
+                                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 flex-1">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <span class="text-sm font-semibold text-gray-800">Sara Bakker</span>
+                                            <span class="text-xs text-gray-400">5 minuten geleden</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600">Hoi Jan, ik ga hier naar kijken. Heb je geprobeerd de cache te wissen?</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex gap-4">
+                                    <div class="h-9 w-9 rounded-full bg-blue-500 flex items-center justify-center text-white text-xs font-bold shrink-0">JD</div>
+                                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 flex-1">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <span class="text-sm font-semibold text-gray-800">Jan de Vries <span class="text-xs text-blue-500 font-normal ml-1">(jij)</span></span>
+                                            <span class="text-xs text-gray-400">1 minuut geleden</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600">Ja dat heb ik geprobeerd, maar het helpt helaas niet.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border border-gray-300 rounded-lg p-4 bg-gray-50">
+                                <textarea disabled rows="3" placeholder="Schrijf een reactie..."
+                                    class="w-full text-sm text-gray-400 bg-transparent resize-none outline-none cursor-default">
+                                </textarea>
+                                <div class="flex justify-end mt-2">
+                                    <button class="bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded cursor-default opacity-75">
+                                        Verstuur reactie
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>

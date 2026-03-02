@@ -31,19 +31,14 @@
                     opacity-0 invisible group-hover:visible group-hover:opacity-100
                     transition-all duration-150 z-50">
 
-                <a href="{{ route('over-ons') }}"
+                <a href="{{ route('features') }}"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Features
                 </a>
 
-                <a href="{{ route('over-ons') }}"
+                <a href="{{ route('demo') }}"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Demo
-                </a>
-
-                <a href="{{ route('over-ons') }}"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Updates
                 </a>
             </div>
         </div>
@@ -64,24 +59,19 @@
                     opacity-0 invisible group-hover:visible group-hover:opacity-100
                     transition-all duration-150 z-50">
 
-                <a href="{{ route('over-ons') }}"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Documentatie
-                </a>
-
-                <a href="{{ route('over-ons') }}"
+                <a href="{{ route('faq') }}"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     FAQ
                 </a>
 
-                <a href="{{ route('over-ons') }}"
+                <a href="https://status.sanderhd.tech/"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Status
                 </a>
             </div>
         </div>
 
-        <x-nav-link :href="route('over-ons')">
+        <x-nav-link :href="route('contact')">
             Contact
         </x-nav-link>
     </div>

@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>FAQ - {{  config('app.name', 'Ticket Flow') }}</title>
+        <title>Features - {{ config('app.name', 'Ticket Flow') }}</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
@@ -18,174 +18,276 @@
     <body class="bg-gray-50">
         @include('layouts.navbar')
 
+        {{-- Hero --}}
         <section class="bg-gray-50 border-b">
             <div class="max-w-7xl mx-auto px-6 py-20 text-center">
                 <span class="inline-block bg-blue-100 text-blue-700 text-sm font-medium px-4 py-1 rounded-full mb-4">
-                    Veelgestelde vragen
+                    Wat we bieden
                 </span>
                 <h1 class="text-4xl font-bold text-gray-900 mb-4">
-                    Alles wat je wilt weten over <br>
-                    Ticket Flow
+                    Alles wat je nodig hebt voor<br>
+                    efficiënte support
                 </h1>
                 <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Vind snel antwoord op de meest gestelde vragen over ons platform, je account, tickets en meer.
+                    {{ config('app.name', 'Ticket Flow') }} biedt een volledig pakket aan tools
+                    om supportvragen snel, overzichtelijk en transparant af te handelen.
                 </p>
             </div>
         </section>
 
-        <section class="bg-white border-b sticky top-0 z-10 shadow-sm">
-            <div class="max-w-7xl mx-auto px-6 py-3 flex gap-6 overflow-x-auto text-sm font-medium text-gray-600">
-                <a href="#algemeen" class="hover:text-blue-600 whitespace-nowrap transition">Algemeen</a>
-                <a href="#account" class="hover:text-blue-600 whitespace-nowrap transition">Account</a>
-                <a href="#tickets" class="hover:text-blue-600 whitespace-nowrap transition">Tickets</a>
-                <a href="#rollen" class="hover:text-blue-600 whitespace-nowrap transition">Rollen</a>
-                <a href="#beveiliging" class="hover:text-blue-600 whitespace-nowrap transition">Beveiliging</a>
-                <a href="#prijzen" class="hover:text-blue-600 whitespace-nowrap transition">Prijzen</a>
+        {{-- Snelle overzicht 4-koloms --}}
+        <section class="bg-white border-b">
+            <div class="max-w-7xl mx-auto px-6 py-16">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
+                    <div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fa-solid fa-ticket text-blue-600"></i>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-1">Ticketsysteem</h3>
+                        <p class="text-sm text-gray-500">Centraal beheer van alle supportvragen</p>
+                    </div>
+                    <div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fa-solid fa-gauge text-blue-600"></i>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-1">Live Dashboard</h3>
+                        <p class="text-sm text-gray-500">Realtime inzicht in de status van tickets</p>
+                    </div>
+                    <div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fa-solid fa-shield-halved text-blue-600"></i>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-1">Rollen & Rechten</h3>
+                        <p class="text-sm text-gray-500">Toegangsbeheer per gebruiker of team</p>
+                    </div>
+                    <div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fa-solid fa-headset text-blue-600"></i>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-1">Communicatie</h3>
+                        <p class="text-sm text-gray-500">Directe reacties binnen elk ticket</p>
+                    </div>
+                </div>
             </div>
         </section>
 
+        {{-- Feature blokken --}}
         <section class="bg-white">
-            <div class="max-w-4xl mx-auto px-6 py-24 space-y-20">
-                <div id="algemeen">
-                    <div class="mb-8">
-                        <h2 class="text-2xl font-semibold text-gray-900 mb-2">Algemeen</h2>
-                        <div class="w-12 h-1 bg-blue-600 rounded-full"></div>
+            <div class="max-w-7xl mx-auto px-6 py-24 space-y-24">
+
+                {{-- Feature 1: Tickets --}}
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <span class="inline-block bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full mb-4">Tickets</span>
+                        <h2 class="text-2xl font-semibold text-gray-900 mb-2">Alles op één plek</h2>
+                        <div class="w-12 h-1 bg-blue-600 rounded-full mb-4"></div>
+                        <p class="text-gray-600 mb-5">
+                            Maak tickets aan met een titel, omschrijving, prioriteit en labels.
+                            Volg de volledige geschiedenis van elk ticket inclusief statuswijzigingen
+                            en reacties van het supportteam.
+                        </p>
+                        <ul class="space-y-3 text-gray-700 text-sm">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-600 mt-0.5"></i> Tickets aanmaken, bewerken en sluiten</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-600 mt-0.5"></i> Statussen: Open, In behandeling, Gesloten</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-600 mt-0.5"></i> Gesloten tickets heropenen</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-600 mt-0.5"></i> Volledige reactiethread per ticket</li>
+                        </ul>
                     </div>
-                    <div class="space-y-4">
-                        <x-faq-item
-                            question="Wat is Ticket Flow?"
-                            answer="Ticket Flow is een platform dat helpt bij het beheren en volgen van tickets binnen organisaties." />
-
-                        <x-faq-item
-                            question="Voor wie is dit platform bedoeld?"
-                            answer="Het platform is geschikt voor bedrijven, Discord communities, support teams en developers die op zoek zijn naar een overzichtelijke en schaalbare oplossing voor klantenservice." />
-
-                        <x-faq-item
-                            question="Is er een gratis versie beschikbaar?"
-                            answer="Ja, je kunt gratis aan de slag met een beperkt aantal tickets en gebruikers. Voor grotere organisaties bieden wij betaalde plannen met meer mogelijkheden." />
-
-                        <x-faq-item
-                            question="In welke talen is het platform beschikbaar?"
-                            answer="Op dit moment is het platform beschikbaar in het Nederlands en Engels. Meer talen worden in de toekomst toegevoegd." />
-                    </div>
-                </div>
-
-                <div id="account">
-                    <div class="mb-8">
-                        <h2 class="text-2xl font-semibold text-gray-900 mb-2">Account</h2>
-                        <div class="w-12 h-1 bg-blue-600 rounded-full"></div>
-                    </div>
-                    <div class="space-y-4">
-                        <x-faq-item
-                            question="Hoe maak ik een account aan?"
-                            answer="Klik op 'Registreren' in de navigatiebalk, vul je naam, e-mailadres en een wachtwoord in en je account is direct klaar voor gebruik." />
-
-                        <x-faq-item
-                            question="Kan ik mijn profielgegevens wijzigen?"
-                            answer="Ja, via Instellingen kun je je naam, e-mailadres, wachtwoord en profielfoto op elk moment aanpassen." />
-
-                        <x-faq-item
-                            question="Hoe reset ik mijn wachtwoord?"
-                            answer="Ga naar de inlogpagina en klik op 'Wachtwoord vergeten'. Je ontvangt een e-mail met een resetlink die 60 minuten geldig is." />
-
-                        <x-faq-item
-                            question="Kan ik mijn account verwijderen?"
-                            answer="Ja, je kunt je account permanent verwijderen via de instellingenpagina. Let op: alle gekoppelde tickets worden hierbij ook verwijderd en dit is niet ongedaan te maken." />
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 space-y-3">
+                        @foreach([
+                            ['title' => 'Probleem met inloggen',      'status' => 'open',        'priority' => 'high',   'color' => 'bg-yellow-500 text-black'],
+                            ['title' => 'Foutmelding bij bestelling', 'status' => 'in_progress', 'priority' => 'medium', 'color' => 'bg-blue-500 text-white'],
+                            ['title' => 'Account verwijderen',        'status' => 'closed',      'priority' => 'low',    'color' => 'bg-green-500 text-white'],
+                        ] as $t)
+                        <div class="bg-white border border-gray-200 rounded-lg px-4 py-3 flex items-center justify-between shadow-sm">
+                            <span class="text-sm font-medium text-gray-800">{{ $t['title'] }}</span>
+                            <span class="text-xs font-semibold px-2 py-0.5 rounded-full {{ $t['color'] }}">
+                                {{ ucfirst(str_replace('_', ' ', $t['status'])) }}
+                            </span>
+                        </div>
+                        @endforeach
                     </div>
                 </div>
 
-                <div id="tickets">
-                    <div class="mb-8">
-                        <h2 class="text-2xl font-semibold text-gray-900 mb-2">Tickets</h2>
-                        <div class="w-12 h-1 bg-blue-600 rounded-full"></div>
+                {{-- Feature 2: Prioriteiten & Labels --}}
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div class="order-2 md:order-1 bg-gray-50 border border-gray-200 rounded-xl p-6">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-700">High</span>
+                            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-700">Medium</span>
+                            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">Low</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700">auth</span>
+                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700">betaling</span>
+                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700">urgent</span>
+                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700">account</span>
+                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700">performance</span>
+                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700">factuur</span>
+                        </div>
                     </div>
-                    <div class="space-y-4">
-                        <x-faq-item
-                            question="Hoe maak ik een ticket aan?"
-                            answer="Zodra je bent ingelogd, ga je naar 'Tickets' en klik je op 'Nieuw ticket'. Vul een titel, categorie, prioriteit en omschrijving in en het ticket wordt direct aangemaakt." />
-
-                        <x-faq-item
-                            question="Welke statussen kan een ticket hebben?"
-                            answer="Een ticket kan de volgende statussen hebben: Open, In behandeling, Wacht op reactie en Gesloten. De status wordt bijgewerkt door het supportteam." />
-
-                        <x-faq-item
-                            question="Kan ik bijlagen toevoegen aan een ticket?"
-                            answer="Ja, je kunt afbeeldingen en bestanden meesturen bij het aanmaken of beantwoorden van een ticket. Maximale bestandsgrootte is 10 MB per bijlage." />
-
-                        <x-faq-item
-                            question="Kan ik een gesloten ticket heropenen?"
-                            answer="Ja, zolang je toegang hebt tot het ticket kun je het heropenen via de ticketdetailpagina. Het ticket krijgt dan automatisch de status 'Open' terug." />
-
-                        <x-faq-item
-                            question="Word ik op de hoogte gesteld bij een reactie op mijn ticket?"
-                            answer="Ja, je ontvangt een e-mailmelding zodra er een reactie is geplaatst op jouw ticket of de status is gewijzigd." />
-                    </div>
-                </div>
-
-                <div id="rollen">
-                    <div class="mb-8">
-                        <h2 class="text-2xl font-semibold text-gray-900 mb-2">Rollen & Rechten</h2>
-                        <div class="w-12 h-1 bg-blue-600 rounded-full"></div>
-                    </div>
-                    <div class="space-y-4">
-                        <x-faq-item
-                            question="Welke rollen zijn er beschikbaar?"
-                            answer="Er zijn drie rollen: Gebruiker (kan tickets aanmaken en volgen), Medewerker (kan tickets beheren en beantwoorden) en Admin (volledig beheer van het platform)." />
-
-                        <x-faq-item
-                            question="Wie kan rollen toewijzen?"
-                            answer="Alleen administrators kunnen rollen toewijzen of wijzigen binnen het platform." />
-
-                        <x-faq-item
-                            question="Kan een medewerker tickets van andere medewerkers inzien?"
-                            answer="Ja, medewerkers hebben toegang tot alle open tickets. Admins kunnen eventueel ticket-toewijzing instellen zodat medewerkers enkel hun eigen tickets zien." />
+                    <div class="order-1 md:order-2">
+                        <span class="inline-block bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full mb-4">Prioriteiten & Labels</span>
+                        <h2 class="text-2xl font-semibold text-gray-900 mb-2">Direct overzicht met labels</h2>
+                        <div class="w-12 h-1 bg-blue-600 rounded-full mb-4"></div>
+                        <p class="text-gray-600 mb-5">
+                            Wijs prioriteiten toe aan tickets zodat het supportteam weet wat het meest urgent is.
+                            Voeg vrije labels toe voor extra categorisering en filter snel op wat relevant is.
+                        </p>
+                        <ul class="space-y-3 text-gray-700 text-sm">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-600 mt-0.5"></i> Drie prioriteitsniveaus: Low, Medium, High</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-600 mt-0.5"></i> Vrije labels per ticket (kommagescheiden)</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-600 mt-0.5"></i> Filteren op status, prioriteit en label</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-600 mt-0.5"></i> Zoeken in tickettitels</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div id="beveiliging">
-                    <div class="mb-8">
-                        <h2 class="text-2xl font-semibold text-gray-900 mb-2">Beveiliging</h2>
-                        <div class="w-12 h-1 bg-blue-600 rounded-full"></div>
+                {{-- Feature 3: Dashboard --}}
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <span class="inline-block bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full mb-4">Dashboard</span>
+                        <h2 class="text-2xl font-semibold text-gray-900 mb-2">Inzicht in één oogopslag</h2>
+                        <div class="w-12 h-1 bg-blue-600 rounded-full mb-4"></div>
+                        <p class="text-gray-600 mb-5">
+                            Het persoonlijke dashboard geeft je direct inzicht in de verdeling van je tickets
+                            via een doughnut chart en een overzicht van de meest recente activiteit.
+                        </p>
+                        <ul class="space-y-3 text-gray-700 text-sm">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-600 mt-0.5"></i> Doughnut chart met ticket­verdeling</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-600 mt-0.5"></i> Lijst van recente tickets</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-600 mt-0.5"></i> Directe navigatie naar ticketoverzicht</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-600 mt-0.5"></i> Persoonlijk per ingelogde gebruiker</li>
+                        </ul>
                     </div>
-                    <div class="space-y-4">
-                        <x-faq-item
-                            question="Hoe worden mijn gegevens beschermd?"
-                            answer="Alle communicatie verloopt via HTTPS. Wachtwoorden worden gehasht opgeslagen en nooit leesbaar bewaard. We volgen de GDPR-richtlijnen voor gegevensbescherming." />
-
-                        <x-faq-item
-                            question="Worden mijn gegevens gedeeld met derden?"
-                            answer="Nee, wij verkopen of delen jouw persoonlijke gegevens nooit met derden. Bekijk ons privacybeleid voor meer details." />
-
-                        <x-faq-item
-                            question="Ondersteunt het platform tweefactorauthenticatie (2FA)?"
-                            answer="2FA-ondersteuning staat op onze roadmap en wordt binnenkort uitgerold. Je kunt je aanmelden voor updates via de nieuwsbrief." />
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-sm font-semibold text-gray-800">Mijn tickets</span>
+                            <span class="text-xs text-gray-400">vandaag</span>
+                        </div>
+                        <div class="flex items-center justify-around">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-yellow-500">3</div>
+                                <div class="text-xs text-gray-500 mt-1">Open</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-blue-500">2</div>
+                                <div class="text-xs text-gray-500 mt-1">In behandeling</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-green-500">1</div>
+                                <div class="text-xs text-gray-500 mt-1">Gesloten</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div id="prijzen">
-                    <div class="mb-8">
-                        <h2 class="text-2xl font-semibold text-gray-900 mb-2">Prijzen</h2>
-                        <div class="w-12 h-1 bg-blue-600 rounded-full"></div>
+                {{-- Feature 4: Rollen --}}
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div class="order-2 md:order-1 bg-gray-50 border border-gray-200 rounded-xl p-6 space-y-4">
+                        @foreach([
+                            ['role' => 'Admin',      'icon' => 'fa-crown',      'color' => 'text-yellow-500', 'desc' => 'Volledig beheer van platform en gebruikers'],
+                            ['role' => 'Medewerker', 'icon' => 'fa-headset',    'color' => 'text-blue-500',   'desc' => 'Beheer en beantwoord alle tickets'],
+                            ['role' => 'Gebruiker',  'icon' => 'fa-user',       'color' => 'text-gray-500',   'desc' => 'Aanmaken en volgen van eigen tickets'],
+                        ] as $r)
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-white border border-gray-200 rounded-lg flex items-center justify-center shrink-0 shadow-sm">
+                                <i class="fa-solid {{ $r['icon'] }} {{ $r['color'] }}"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-900">{{ $r['role'] }}</p>
+                                <p class="text-xs text-gray-500">{{ $r['desc'] }}</p>
+                            </div>
+                        </div>
+                        @endforeach
                     </div>
-                    <div class="space-y-4">
-                        <x-faq-item
-                            question="Wat zijn de kosten?"
-                            answer="We bieden een gratis basisplan. Betaalde plannen beginnen vanaf €9/maand voor kleine teams. Bekijk onze prijspagina voor een volledig overzicht." />
-
-                        <x-faq-item
-                            question="Zijn er verborgen kosten?"
-                            answer="Nee. De prijs die je ziet is wat je betaalt. Geen opstartkosten, geen verborgen transactiekosten." />
-
-                        <x-faq-item
-                            question="Kan ik op elk moment opzeggen?"
-                            answer="Ja, je kunt je abonnement op elk moment opzeggen. Je behoudt toegang tot het einde van de betaalde periode." />
+                    <div class="order-1 md:order-2">
+                        <span class="inline-block bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full mb-4">Rollen & Rechten</span>
+                        <h2 class="text-2xl font-semibold text-gray-900 mb-2">De juiste rechten voor iedereen</h2>
+                        <div class="w-12 h-1 bg-blue-600 rounded-full mb-4"></div>
+                        <p class="text-gray-600 mb-5">
+                            Wijs rollen toe aan gebruikers om de toegang tot het platform te beheren.
+                            Admins hebben volledig beheer, medewerkers kunnen tickets oppakken
+                            en gebruikers volgen hun eigen aanvragen.
+                        </p>
+                        <ul class="space-y-3 text-gray-700 text-sm">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-600 mt-0.5"></i> Drie rollen: Gebruiker, Medewerker, Admin</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-600 mt-0.5"></i> Rollen instelbaar door admins</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-600 mt-0.5"></i> Admin-paneel voor contactberichten</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-600 mt-0.5"></i> Beveiligde routes per rol</li>
+                        </ul>
                     </div>
+                </div>
+
+                {{-- Feature 5: Profiel --}}
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <span class="inline-block bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full mb-4">Profiel</span>
+                        <h2 class="text-2xl font-semibold text-gray-900 mb-2">Jouw account, jouw instellingen</h2>
+                        <div class="w-12 h-1 bg-blue-600 rounded-full mb-4"></div>
+                        <p class="text-gray-600 mb-5">
+                            Beheer je persoonlijke gegevens eenvoudig via de instellingenpagina.
+                            Upload een profielfoto, wijzig je naam of e-mailadres en
+                            stel een nieuw wachtwoord in.
+                        </p>
+                        <ul class="space-y-3 text-gray-700 text-sm">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-600 mt-0.5"></i> Naam en e-mailadres wijzigen</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-600 mt-0.5"></i> Profielfoto uploaden</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-600 mt-0.5"></i> Wachtwoord bijwerken</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-blue-600 mt-0.5"></i> Account permanent verwijderen</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-6">
+                        <div class="flex items-center gap-4 mb-5">
+                            <div class="h-14 w-14 rounded-full bg-blue-500 flex items-center justify-center text-white text-xl font-bold shrink-0">JD</div>
+                            <div>
+                                <p class="font-semibold text-gray-900">Jan de Vries</p>
+                                <p class="text-sm text-gray-500">jan@example.com</p>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm border-b border-gray-100 pb-2">
+                                <span class="text-gray-500">Naam</span>
+                                <span class="text-gray-800 font-medium">Jan de Vries</span>
+                            </div>
+                            <div class="flex justify-between text-sm border-b border-gray-100 pb-2">
+                                <span class="text-gray-500">E-mail</span>
+                                <span class="text-gray-800 font-medium">jan@example.com</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">Rol</span>
+                                <span class="text-blue-600 font-medium">Gebruiker</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        {{-- CTA onderaan --}}
+        <section class="bg-gray-50 border-t">
+            <div class="max-w-7xl mx-auto px-6 py-20 text-center">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-3">
+                    Klaar om te beginnen?
+                </h2>
+                <p class="text-gray-600 mb-8">
+                    Maak gratis een account aan en ontdek alle features zelf.
+                </p>
+                <div class="flex justify-center gap-4">
+                    <a href="{{ route('register') }}"
+                       class="inline-block bg-blue-600 text-white font-medium px-6 py-3 rounded-lg hover:bg-blue-700 transition">
+                        Gratis registreren
+                    </a>
+                    <a href="{{ route('demo') }}"
+                       class="inline-block bg-white border border-gray-300 text-gray-700 font-medium px-6 py-3 rounded-lg hover:bg-gray-50 transition">
+                        Bekijk demo
+                    </a>
                 </div>
             </div>
         </section>
 
         @include('layouts.cta')
-
         @include('layouts.footer')
     </body>
 </html>

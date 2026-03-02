@@ -24,6 +24,18 @@ Route::get('contact', function () {
     return view('contact');
 })->name('contact');
 
+Route::get('faq', function () {
+    return view('faq');
+})->name('faq');
+
+Route::get('demo', function () {
+    return view('demo');
+})->name('demo');
+
+Route::get('features', function () {
+    return view('features');
+})->name('features');
+
 Route::post('contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('faq', function () {
