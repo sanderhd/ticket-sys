@@ -115,4 +115,53 @@ class TicketController extends Controller
 
         return view ('dashboard', compact('stats'));
     }
+
+    public function requestClosure(Ticket $ticket)
+    {
+        $this->authorize('update', $ticket);
+
+        if ($ticket->status === 'closed') {
+            return redirect()->back()->with('error', 'Ticket is already closed.');
+        }
+
+        if ($ticket->closure_requested) {
+            return redirect()->back()->with('success', 'Closure has already been requested.');
+        }
+
+        $ticket->update(['closure_requested' => true]);
+
+        return redirect()->route('tickets.show', $ticket)->with('success', 'Closure requested. An admin will review this.');
+    }
+
+    public function handleClosure(Request $request, Ticket $ticket)
+    {
+        if (!auth()->user() || !auth()->user()->isAdmin()) {
+            abort(403);
+        }
+
+        $validated = $request->validate([
+            'action' => 'required|in:approve,decline,close',
+            'reason' => 'nullable|string|max:2000',
+        ]);
+
+        $action = $validated['action'];
+        $reason = $validated['reason'] ?? null;
+
+        if (in_array($action, ['approve', 'close'])) {
+            $ticket->update([
+                'status' => 'closed',
+                'closed_reason' => $reason,
+                'closure_requested' => false,
+            ]);
+
+            return redirect()->route('tickets.show', $ticket)->with('success', 'Ticket gesloten.');
+        }
+
+        if ($action === 'decline') {
+            $ticket->update(['closure_requested' => false]);
+            return redirect()->route('tickets.show', $ticket)->with('success', 'Sluitingsverzoek afgewezen.');
+        }
+
+        return redirect()->back();
+    }
 }

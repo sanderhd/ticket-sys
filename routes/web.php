@@ -68,6 +68,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('tickets', TicketController::class);
+    Route::post('/tickets/{ticket}/request-closure', [TicketController::class, 'requestClosure'])->name('tickets.requestClosure');
+    Route::post('/tickets/{ticket}/closure', [TicketController::class, 'handleClosure'])->name('tickets.handleClosure');
 });
 
 Route::post('/tickets/{ticket}/comments', [CommentController::class, 'store'])->middleware('auth')->name('comments.store');

@@ -14,8 +14,21 @@ class Ticket extends Model
         'description',
         'status',
         'user_id',
+        'closure_requested',
+        'closed_reason',
         'priority',
         'labels',
+    ];
+
+    protected $casts = [
+        'closure_requested' => 'boolean',
+    ];
+
+    /**
+     * Reason provided when a ticket is closed by an admin.
+     */
+    protected $attributes = [
+        'closed_reason' => null,
     ];
 
     public function user()

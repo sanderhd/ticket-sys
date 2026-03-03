@@ -21,6 +21,18 @@
                     {{ ucfirst(str_replace('_', ' ', $ticket->status)) }}
                 </span>
             </div>
+            @if(auth()->check() && auth()->id() === $ticket->user_id)
+                @if(!$ticket->closure_requested && $ticket->status !== 'closed')
+                    <form action="{{ route('tickets.requestClosure', $ticket) }}" method="POST" class="mb-4">
+                        @csrf
+                        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded">Sluiting aanvragen</button>
+                    </form>
+                @elseif($ticket->closure_requested)
+                    <div class="mb-4 p-3 rounded bg-yellow-50 border border-yellow-200 text-yellow-700">
+                        Sluiting aangevraagd. Een beheerder zal dit controleren.
+                    </div>
+                @endif
+            @endif
             @if(auth()->user()->isPro())
                 <form action="{{ route('tickets.update', $ticket) }}" method="POST" class="mb-4">
                     @csrf
@@ -76,6 +88,42 @@
 
                 <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">Update</button>
             </form>
+
+            @if($ticket->closure_requested)
+                <div class="mt-4 p-4 rounded bg-yellow-50 border border-yellow-200">
+                    <p class="font-semibold text-yellow-700">Sluitingsverzoek ontvangen</p>
+                    <p class="text-sm text-gray-700 mt-2">De eigenaar heeft gevraagd om dit ticket te sluiten. Kies hieronder om te sluiten of het verzoek af te wijzen.</p>
+
+                    <div class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <form action="{{ route('tickets.handleClosure', $ticket) }}" method="POST" class="space-y-2">
+                            @csrf
+                            <input type="hidden" name="action" value="approve">
+                            <label class="block text-sm font-medium text-gray-700">Reden (optioneel)</label>
+                            <textarea name="reason" rows="3" class="w-full p-2 border border-gray-300 rounded"></textarea>
+                            <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">Sluit ticket (goedkeuren)</button>
+                        </form>
+
+                        <form action="{{ route('tickets.handleClosure', $ticket) }}" method="POST" class="space-y-2">
+                            @csrf
+                            <input type="hidden" name="action" value="decline">
+                            <label class="block text-sm font-medium text-gray-700">Optioneel bericht</label>
+                            <textarea name="reason" rows="3" class="w-full p-2 border border-gray-300 rounded"></textarea>
+                            <button type="submit" class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded">Weiger verzoek</button>
+                        </form>
+                    </div>
+                </div>
+            @endif
+
+            <div class="mt-4 border-t pt-4">
+                <h5 class="font-semibold mb-2">Direct sluiten</h5>
+                <form action="{{ route('tickets.handleClosure', $ticket) }}" method="POST" class="space-y-2">
+                    @csrf
+                    <input type="hidden" name="action" value="close">
+                    <label class="block text-sm font-medium text-gray-700">Reden voor sluiten (verplicht bij sluiten)</label>
+                    <textarea name="reason" rows="3" required class="w-full p-2 border border-gray-300 rounded"></textarea>
+                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded">Sluit ticket</button>
+                </form>
+            </div>
         </div>
         @endif
 
@@ -120,23 +168,34 @@
             @endif
 
             @auth
-            <form action="{{ route('comments.store', $ticket) }}" method="POST">
-                @csrf
-                <div class="border border-gray-300 rounded-lg p-4 bg-gray-50">
-                    <textarea
-                        name="body"
-                        rows="3"
-                        class="w-full text-sm text-gray-800 bg-transparent resize-none outline-none placeholder-gray-400"
-                        placeholder="Schrijf een reactie..."></textarea>
-                    <x-input-error :messages="$errors->get('body')" class="mt-1" />
-                    <div class="flex justify-end mt-2">
-                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded transition">
-                            Verstuur reactie
-                        </button>
-                    </div>
-                </div>
-            </form>
+                @if($ticket->status !== 'closed')
+                    <form action="{{ route('comments.store', $ticket) }}" method="POST">
+                        @csrf
+                        <div class="border border-gray-300 rounded-lg p-4 bg-gray-50">
+                            <textarea
+                                name="body"
+                                rows="3"
+                                class="w-full text-sm text-gray-800 bg-transparent resize-none outline-none placeholder-gray-400"
+                                placeholder="Schrijf een reactie..."></textarea>
+                            <x-input-error :messages="$errors->get('body')" class="mt-1" />
+                            <div class="flex justify-end mt-2">
+                                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded transition">
+                                    Verstuur reactie
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                @else
+                    <div class="rounded p-4 bg-gray-50 border border-gray-200 text-gray-700">Dit ticket is gesloten — de chat is geblokkeerd.</div>
+                @endif
             @endauth
+
+            @if($ticket->status === 'closed' && $ticket->closed_reason)
+                <div class="mt-4 p-3 rounded bg-green-50 border border-green-200 text-green-700">
+                    <strong>Reden voor sluiting:</strong>
+                    <p class="mt-1 text-sm">{{ $ticket->closed_reason }}</p>
+                </div>
+            @endif
         </div>
     </div>
 </x-app-layout>
