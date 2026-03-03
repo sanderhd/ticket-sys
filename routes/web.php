@@ -43,12 +43,21 @@ Route::get('faq', function () {
 })->name('faq');
 
 Route::get('/dashboard', function () {
-    $stats = Ticket::where('user_id', auth()->id())
+    $user = auth()->user();
+
+    $stats = Ticket::where('user_id', $user->id)
             ->selectRaw('status, COUNT(*) as total')
             ->groupBy('status')
             ->pluck('total', 'status');
 
-    return view('dashboard', compact('stats'));
+    $recentTickets = Ticket::where('user_id', $user->id)->latest()->take(3)->get();
+
+    if ($user->isAdmin()) {
+        $allTickets = Ticket::with(['user', 'comments.user'])->latest()->get();
+        return view('dashboard', compact('stats', 'recentTickets', 'allTickets'));
+    }
+
+    return view('dashboard', compact('stats', 'recentTickets'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
